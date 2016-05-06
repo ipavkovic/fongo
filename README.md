@@ -11,18 +11,18 @@ don't want to spin up a `mongod` process.
 ## Usage
 Add dependency to your project:
 
-### If you use 3.X drivers
+### If you use 3.X drivers (async included)
 
 ```xml
 <dependency>
   <groupId>com.github.fakemongo</groupId>
   <artifactId>fongo</artifactId>
-  <version>2.0.6</version>
+  <version>2.1.0</version>
   <scope>test</scope>
 </dependency>
 ```
 
-[Other dependency management](http://search.maven.org/#artifactdetails|com.github.fakemongo|fongo|2.0.0)
+[Other dependency management](http://search.maven.org/#artifactdetails|com.github.fakemongo|fongo|2.1.0)
 
 ### If you use 2.X drivers (this branch *fongo-drivers-2.x*) will be deprecated soon
 
@@ -35,7 +35,7 @@ Add dependency to your project:
 </dependency>
 ```
 
-[Other dependency management](http://search.maven.org/#artifactdetails|com.github.fakemongo|fongo|1.6.2)
+[Other dependency management](http://search.maven.org/#artifactdetails|com.github.fakemongo|fongo|1.6.5)
 
 
 *Alternatively: clone this repo and build the jar: `mvn package` then copy jar to your classpath*
@@ -76,7 +76,7 @@ It also has a "provided" dependency on sl4j-api for logging. If you don't alread
 <dependency> 
   <groupId>ch.qos.logback</groupId>
   <artifactId>logback-classic</artifactId>
-  <version>1.1.1</version>
+  <version>1.1.7</version>
   <scope>test</scope>
 </dependency>
 ```
@@ -145,6 +145,35 @@ public FongoRule fongoRule = new FongoRule(new ServerVersion(2, 6));
 
 In this case, the drivers didn't handle queries with the same way.
 
+## Junit (async drivers)    
+
+If you use JUnit in your project, you can use Rule to instantiate a `Fongo` object :
+
+```java
+@Rule
+public FongoAsyncRule fongoAsyncRule = new FongoAsyncRule();
+```
+
+If you need, you can easily switch to your real MongoDB server (on localhost for now).
+
+```java
+@Rule
+public FongoAsyncRule fongoAsyncRule = new FongoAsyncRule(true);
+```
+
+WARNING : In this case, the database WILL BE DROPPED when test is finish.
+So, use a random database name (e.g. UUID), BUT NOT your real database.
+
+You can specify the version of the database with :
+
+```java
+@Rule
+public FongoAsyncRule fongoAsyncRule = new FongoAsyncRule(new ServerVersion(2, 6));
+```
+
+In this case, the drivers didn't handle queries with the same way.
+
+
 ## Text Search Simulation
 Fongo simulates [text search](http://docs.mongodb.org/manual/reference/command/text/) now.
 The results of text search are quite similar to real, but not exactly.
@@ -201,6 +230,7 @@ your name to the patch contributors below. Please maintain the same code formatt
 
 ## Changelog
 
+Version 2.1.0 include compatibility with 3.X async driver version.
 Version 2.0.0 break compatibility with 2.X driver version.
 Version 1.6.0 break compatibility with 2.12.X driver version.
 

@@ -1002,8 +1002,8 @@ public class FongoTest {
   // TODO WDEL
 //  @Test
 //  public void testAuthentication() {
-//    Assume.assumeFalse(fongoRule.isRealMongo());
-//    DB fongoDB = fongoRule.getDB("testDB");
+//    Assume.assumeFalse(fongoAsyncRule.isRealMongo());
+//    DB fongoDB = fongoAsyncRule.getDB("testDB");
 //    assertFalse(fongoDB.isAuthenticated());
 //    // Once authenticated, fongoDB should be available to answer yes, whatever the credentials were.
 //    assertTrue(fongoDB.authenticate("login", "password".toCharArray()));

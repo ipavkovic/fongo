@@ -539,6 +539,13 @@ public class FongoConnection implements Connection {
 //          new BsonInt64(0)).append("ns", new BsonString(dbCollection.getFullName()))
 //          .append("firstBatch", FongoBsonArrayWrapper.bsonArrayWrapper(each)));
       return reencode(commandResultDecoder, "cursor", new BasicDBObject("id", 0L).append("ns", dbCollection.getFullName()).append("firstBatch", each));
+    } else if (command.containsKey("listDatabases")) {
+      final List<String> databaseNames = fongo.getDatabaseNames();
+      final List<BsonDocument> documents = new ArrayList<BsonDocument>();
+      for (String databaseName : databaseNames) {
+        documents.add(new BsonDocument("name", new BsonString(databaseName)));
+      }
+      return (T) new BsonDocument("databases", FongoBsonArrayWrapper.bsonArrayWrapper(documents));
     } else {
       LOG.warn("Command not implemented: {}", command);
       throw new FongoException("Not implemented for command : " + JSON.serialize(dbObject(command)));

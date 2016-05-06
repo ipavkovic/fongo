@@ -87,7 +87,7 @@ public class FongoAggregateZipTest {
 
     List<DBObject> resultAggregate = Lists.newArrayList(output.results());
     // TODO(twillouer) : $project { _id : 0 } must remove the id field but $sort add him...
-//    Assert.assertEquals(fongoRule.parseList("" +
+//    Assert.assertEquals(fongoAsyncRule.parseList("" +
 //        "[ { \"biggestCity\" : { \"name\" : \"BRIDGEPORT\" , \"pop\" : 141638} , \"smallestCity\" : { \"name\" : \"EAST KILLINGLY\" , \"pop\" : 25} , \"state\" : \"CT\"} , " +
 //        "{ \"biggestCity\" : { \"name\" : \"BROOKLYN\" , \"pop\" : 2300504} , \"smallestCity\" : { \"name\" : \"NEW HYDE PARK\" , \"pop\" : 1} , \"state\" : \"NY\"} , " +
 //        "{ \"biggestCity\" : { \"name\" : \"BURLINGTON\" , \"pop\" : 39127} , \"smallestCity\" : { \"name\" : \"UNIV OF VERMONT\" , \"pop\" : 0} , \"state\" : \"VT\"} , " +
